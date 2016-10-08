@@ -5,14 +5,32 @@ import {pipelineEdit} from "./pipelineEdit";
 
 
 export function setPath(options){
+    var fromDom = $("#"+options.startData.id)[0].__data__;
+    var toDom = $("#"+options.endData.id)[0].__data__;
+
+
+    var fromParentIndex = $("#"+options.startData.id).attr("data-parent");
+    var fromIndex = $("#"+options.startData.id).attr("data-index");
+
+    var toParentIndex = $("#"+options.endData.id).attr("data-parent");
+    var toIndex = $("#"+options.endData.id).attr("data-index");
+
+    var startPoint = {x:fromDom.translateX,y:fromDom.translateY},
+        endPoint = {x:toDom.translateX,y:toDom.translateY}
+   
     constant.lineView[options.pipelineLineViewId]
         .append("path")
-        .attr("d", getPathData(options.startPoint,options.endPoint))
+        .attr("d", getPathData(startPoint,endPoint))
         .attr("fill", "none")
         .attr("stroke-opacity", "0.2")
         .attr("stroke", "green")
         .attr("stroke-width", 15)
         .attr("class",options.defaultClass)
+        .attr("from-parent",!fromParentIndex ? -1 : fromParentIndex)
+        .attr("from-index",fromIndex)
+        .attr("to-parent",toParentIndex)
+        .attr("to-index",toIndex)
+        .attr("data-index",options.index)
         .on("mouseover",function(){
             this.parentNode.appendChild(this);
             d3.select(this).attr("stroke-opacity","1");
@@ -21,12 +39,13 @@ export function setPath(options){
             d3.select(this).attr("stroke-opacity","0.2");
         })
         .on("click",function(d){
+            var linkDom = $(this);
             $.ajax({
                 url: "./templates/pipelineEdit.html",
                 type: "GET",
                 cache: false,
                 success: function (data) {
-                    pipelineEdit(data);
+                    pipelineEdit(data,linkDom);
                 }
             });
         });

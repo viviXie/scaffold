@@ -1058,7 +1058,7 @@
   .item.appender > .property { 
      background-color: #999999; 
      cursor: pointer;
-     width: 100px;
+     width: 150px;
   }
 
   .item.string > .property { background-color: #009408; }
@@ -1097,7 +1097,7 @@
 
 
 
-div.jsoneditor-contextmenu-root {
+div.jsoneditor-contextmenu-root-treeedit {
     position: relative;
     width: 0;
     height: 0;
@@ -1284,7 +1284,25 @@ div.jsoneditor-contextmenu ul li ul {
   
 }
 
+// from edit
+#inputTreeEditor .jsoneditor-contextmenu-root {
+    position: relative;
+    width: 0;
+    height: 0;
+    left:0;
+    top:0;
+}
 
+.jsoneditor-poweredBy{
+  visibility: hidden
+}
 
+#outputTreeEditor .jsoneditor-contextmenu-root {
+    position: relative;
+    width: 0;
+    height: 0;
+    left:0;
+    top:0;
+}
 
 
