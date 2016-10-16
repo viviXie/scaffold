@@ -9,6 +9,10 @@ export function getActionSetupData(action){
     } 
 }
 
+export function setActionType(){
+    data.action.type = $("#action-component-select").val();
+}
+
 export function setActionName(){
     data.action.name = $("#action-name").val();
 }
@@ -40,6 +44,7 @@ export function setK8sPod(k8sPodAdvancedEditor){
 
 var metadata = {
   "action" : {
+    "type" : "Kubernetes",
     "name" : "",
     "timeout" : ""
   },
